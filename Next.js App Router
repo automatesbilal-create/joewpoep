@@ -1,0 +1,16 @@
+vynora-voice/
+├─ app/
+│  ├─ layout.tsx
+│  ├─ page.tsx          ← ✅ YOUR MAIN CODE GOES HERE
+│  └─ globals.css
+│
+├─ public/
+│  └─ favicon.ico
+│
+├─ tailwind.config.js
+├─ postcss.config.js
+├─ package.json
+├─ tsconfig.json
+├─ next.config.js
+├─ .gitignore
+└─ README.md
