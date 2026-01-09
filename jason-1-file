@@ -1,0 +1,361 @@
+// Full Next.js + React + Tailwind website code
+// Dark, cinematic, gym-owner focused design
+// FULL REWRITE: JSX validated, all tags properly closed
+
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+
+export default function Home() {
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const moveGlow = (e: MouseEvent) => {
+      if (!glowRef.current) return;
+      glowRef.current.style.left = `${e.clientX}px`;
+      glowRef.current.style.top = `${e.clientY}px`;
+    };
+    window.addEventListener("mousemove", moveGlow);
+    return () => window.removeEventListener("mousemove", moveGlow);
+  }, []);
+
+  const faq = [
+    {
+      q: "Will callers know they are speaking to AI?",
+      a: "No. Vynora Voice sounds natural and professional. Most callers believe they are speaking to trained front desk staff.",
+    },
+    {
+      q: "Can it book trials or consultations automatically?",
+      a: "Yes. The AI qualifies leads and books trials directly into your calendar or CRM.",
+    },
+    {
+      q: "What if the AI cannot answer a question?",
+      a: "Calls can be routed to staff or logged for follow up so no opportunity is lost.",
+    },
+    {
+      q: "Does this replace front desk staff?",
+      a: "No. It supports them by handling missed calls, overflow, and after hours inquiries.",
+    },
+    {
+      q: "How fast is setup?",
+      a: "Most gyms go live within a few days with fully customized scripts and flows.",
+    },
+  ];
+
+  return (
+    <div className="relative min-h-screen bg-black text-white overflow-hidden font-sans saturate-0 scroll-smooth">
+      {/* Cursor Glow */}
+      <div
+        ref={glowRef}
+        className="pointer-events-none fixed z-50 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl"
+      />
+
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 w-full z-40 bg-black/70 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <span className="font-bold tracking-widest uppercase hover:opacity-80 transition">Vynora Voice</span>
+          <div className="hidden md:flex items-center gap-8 text-sm font-semibold">
+            <a href="#about" className="opacity-70 hover:opacity-100 transition">About</a>
+            <a href="#pricing" className="opacity-70 hover:opacity-100 transition">Pricing</a>
+            <a href="#faq" className="opacity-70 hover:opacity-100 transition">FAQ</a>
+            <a
+              href="#contact"
+              className="ml-4 px-5 py-2 bg-white text-black rounded-lg font-bold uppercase tracking-widest"
+            >
+              Book Demo
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="relative pt-44 pb-44 px-6">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[url(https://images.unsplash.com/photo-1577224682136-56cfcaa4b3f9)] bg-cover bg-center"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/95"></div>
+          <div className="absolute inset-0 opacity-30 bg-[url(https://www.transparenttextures.com/patterns/asfalt-light.png)]"></div>
+        </div>
+        <div className="max-w-7xl mx-auto">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-semibold tracking-tight max-w-4xl leading-tight"
+          >
+            AI Receptionist For Gyms
+            <span className="block mt-4 text-white/60 text-4xl md:text-5xl font-medium">
+              That Never Miss Calls
+            </span>
+          </motion.h1>
+          <p className="mt-10 text-xl text-white/70 max-w-xl leading-relaxed">
+            Capture every lead. Book more trials. Look elite.
+          </p>
+          <a
+            href="#contact"
+            className="inline-block mt-14 px-14 py-5 bg-white text-black font-bold tracking-widest uppercase rounded-xl shadow-xl hover:scale-[1.02] transition"
+          >
+            Get A Live Demo
+          </a>
+        </div>
+      </section>
+
+      {/* Problem */}
+      <section className="py-36 relative border-t border-white/10">
+        <div className="absolute inset-0 -z-10 bg-[url(https://images.unsplash.com/photo-1558611848-73f7eb4001a1)] bg-cover bg-center grayscale"></div>
+        <div className="absolute inset-0 -z-10 bg-black/75"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+          <h2 className="text-4xl font-bold uppercase">Missed calls cost real money</h2>
+          <p className="text-white/70 text-lg">
+            High revenue gyms lose thousands each month from unanswered calls and slow follow ups. Vynora Voice ensures every opportunity is captured instantly.
+          </p>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-36">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-bold uppercase mb-20">How It Works</h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            {["Answers Every Call", "Qualifies Serious Leads", "Books Trials Automatically"].map((title, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -8 }}
+                className="p-10 border border-white/10 rounded-2xl bg-black/60 backdrop-blur-sm shadow-2xl"
+              >
+                <h3 className="text-xl font-bold mb-4 uppercase">{title}</h3>
+                <p className="text-white/70">
+                  Your AI voice agent handles conversations professionally and drives action without mistakes.
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="py-36 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+          <div>
+            <h2 className="text-4xl font-bold uppercase mb-8">About Vynora Voice</h2>
+            <p className="text-white/70 text-lg mb-6">
+              Vynora Voice was built by a former gym manager who ran day-to-day operations inside real gyms. This product exists because missed calls, overstretched staff, and lost leads are real problems.
+            </p>
+            <p className="text-white/70 text-lg">
+              Every workflow is designed around how gyms actually operate — memberships, trials, class schedules, pricing questions, and follow-ups that convert.
+            </p>
+          </div>
+          <div className="space-y-6">
+            <div className="p-6 border border-white/10 rounded-xl bg-white/5">
+              <h4 className="font-bold uppercase mb-2">Built by operators</h4>
+              <p className="text-white/60">Designed by someone who managed gyms, not software companies.</p>
+            </div>
+            <div className="p-6 border border-white/10 rounded-xl bg-white/5">
+              <h4 className="font-bold uppercase mb-2">Gym-specific AI</h4>
+              <p className="text-white/60">Trained on real gym conversations, not generic call scripts.</p>
+            </div>
+            <div className="p-6 border border-white/10 rounded-xl bg-white/5">
+              <h4 className="font-bold uppercase mb-2">Revenue focused</h4>
+              <p className="text-white/60">Built to increase trials, conversions, and booked appointments.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="py-40 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Pricing Header */}
+          <div className="max-w-3xl mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold uppercase mb-6">Packages Built for Gym Operators</h2>
+            <p className="text-white/60 text-lg">
+              Choose the package that matches your gym’s call volume and growth stage. Each package is designed to capture missed calls, reduce front-desk pressure, and turn more callers into paying members.
+            </p>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="grid md:grid-cols-3 gap-12 items-start">
+            {/* Essential */}
+            <div className="relative p-10 border border-white/10 rounded-2xl bg-black/70">
+              <h3 className="text-2xl font-bold uppercase mb-2">Essential Package</h3>
+              <p className="text-white/50 mb-6">Best for single-location gyms</p>
+              <p className="text-4xl font-bold mb-8">$1,497<span className="text-base font-medium"> / month</span></p>
+
+              <div className="mb-8">
+                <p className="text-white/80 font-semibold mb-3">What this package includes</p>
+                <ul className="space-y-3 text-white/65">
+                  <li>• 24/7 AI receptionist (1,000 minutes)</li>
+                  <li>• Tour, PT & trial class booking</li>
+                  <li>• Missed call recovery</li>
+                  <li>• Rescheduling & cancellations handled</li>
+                  <li>• Automated SMS confirmations</li>
+                  <li>• CRM & calendar integration</li>
+                  <li>• Monthly performance reports</li>
+                </ul>
+              </div>
+
+              <div className="pt-6 border-t border-white/10">
+                <p className="text-white/50 text-sm">Annual prepay: $14,970 (2 months free)</p>
+              </div>
+            </div>
+
+            {/* Growth */}
+            <div className="relative p-12 border border-white/20 rounded-2xl bg-white/5 shadow-2xl">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-white text-black text-xs font-bold uppercase rounded-full">
+                Most Popular
+              </div>
+              <h3 className="text-2xl font-bold uppercase mb-2">Growth Package</h3>
+              <p className="text-white/50 mb-6">For high-volume gyms scaling fast</p>
+              <p className="text-4xl font-bold mb-8">$1,997<span className="text-base font-medium"> / month</span></p>
+
+              <div className="mb-8">
+                <p className="text-white/80 font-semibold mb-3">Everything in the Essential Package, plus</p>
+                <ul className="space-y-3 text-white/65">
+                  <li>• 1,500 minutes per month</li>
+                  <li>• Advanced objection handling</li>
+                  <li>• AI cancellation prevention</li>
+                  <li>• Lead qualification & scoring</li>
+                  <li>• Real-time analytics dashboard</li>
+                  <li>• Bi-weekly strategy & optimization calls</li>
+                  <li>• Priority support</li>
+                </ul>
+              </div>
+
+              <div className="pt-6 border-t border-white/10">
+                <p className="text-white/50 text-sm">Annual prepay: $19,970 (2 months free)</p>
+              </div>
+            </div>
+
+            {/* Never Miss Revenue */}
+            <div className="relative p-10 border border-white/10 rounded-2xl bg-black/70">
+              <h3 className="text-2xl font-bold uppercase mb-2">Never Miss Revenue Package</h3>
+              <p className="text-white/50 mb-6">For multi-location & enterprise gyms</p>
+              <p className="text-4xl font-bold mb-8">$2,497<span className="text-base font-medium"> / month</span></p>
+
+              <div className="mb-8">
+                <p className="text-white/80 font-semibold mb-3">Everything in the Growth Package, plus</p>
+                <ul className="space-y-3 text-white/65">
+                  <li>• Unlimited call minutes</li>
+                  <li>• Outbound re-engagement campaigns</li>
+                  <li>• Multi-language support (Spanish included)</li>
+                  <li>• Weekly strategy calls</li>
+                  <li>• Dedicated account manager</li>
+                  <li>• 24/7 VIP support (2-hour SLA)</li>
+                  <li>• Custom AI voice training</li>
+                </ul>
+              </div>
+
+              <div className="pt-6 border-t border-white/10">
+                <p className="text-white/50 text-sm">Annual prepay: $24,970 (2 months free)</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Add-ons */}
+          <div className="mt-28">
+            <div className="max-w-4xl mb-12">
+              <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4">Enhance Your System</h3>
+              <p className="text-white/60 text-lg">
+                Add advanced capabilities as your gym grows. These modules are commonly added by high-performing gyms
+                once core call handling is dialed in.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-6 border border-white/10 rounded-xl bg-black/60">
+                <h4 className="font-bold uppercase mb-2">Outbound Re‑Engagement</h4>
+                <p className="text-white/60 mb-3">
+                  Automatically call back cold leads, missed calls, and past prospects to recover lost revenue.
+                </p>
+                <p className="font-semibold">$997 / month</p>
+              </div>
+
+              <div className="p-6 border border-white/10 rounded-xl bg-black/60">
+                <h4 className="font-bold uppercase mb-2">Advanced Lead Qualification</h4>
+                <p className="text-white/60 mb-3">
+                  Filter serious buyers from time‑wasters so your staff only speaks with high‑intent prospects.
+                </p>
+                <p className="font-semibold">$497 / month</p>
+              </div>
+
+              <div className="p-6 border border-white/10 rounded-xl bg-black/60">
+                <h4 className="font-bold uppercase mb-2">Cancellation Prevention AI</h4>
+                <p className="text-white/60 mb-3">
+                  Intercept cancellation calls and trigger save flows before revenue walks out the door.
+                </p>
+                <p className="font-semibold">$697 / month</p>
+              </div>
+
+              <div className="p-6 border border-white/10 rounded-xl bg-black/60">
+                <h4 className="font-bold uppercase mb-2">Multi‑Language Support</h4>
+                <p className="text-white/60 mb-3">
+                  Serve more members with AI voice support in Spanish or additional languages.
+                </p>
+                <p className="font-semibold">$297 / month per language</p>
+              </div>
+
+              <div className="p-6 border border-white/10 rounded-xl bg-black/60 md:col-span-2">
+                <h4 className="font-bold uppercase mb-2">Custom AI Voice Clone</h4>
+                <p className="text-white/60 mb-3">
+                  Train a custom AI voice to match your brand tone, staff style, or ownership voice.
+                </p>
+                <p className="font-semibold">$2,500 one‑time</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-36 border-t border-white/10">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-4xl font-bold uppercase mb-16">Common Questions</h2>
+          <div className="space-y-10 max-w-3xl">
+            {faq.map((item, i) => (
+              <div key={i} className="border-b border-white/10 pb-6">
+                <h3 className="text-lg font-bold uppercase mb-2">{item.q}</h3>
+                <p className="text-white/70">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-44 relative">
+        <div className="absolute inset-0 -z-10 bg-[url(https://images.unsplash.com/photo-1534367610401-9f5ed68180aa)] bg-cover bg-center grayscale"></div>
+        <div className="absolute inset-0 -z-10 bg-black/80"></div>
+        <div className="max-w-xl mx-auto px-6">
+          <h2 className="text-4xl font-bold uppercase mb-10">Have Our AI Call You</h2>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const data = {
+                name: (form.elements.namedItem("name") as HTMLInputElement).value,
+                phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+              };
+              await fetch("https://hook.eu1.make.com/pci2wjr44dtve0gvjaybgzflnji338fq", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+              });
+              alert("Our AI will call you shortly.");
+              form.reset();
+            }}
+            className="space-y-6"
+          >
+            <input name="name" placeholder="Your name" className="w-full p-4 bg-black border border-white/20 rounded-lg" required />
+            <input name="phone" placeholder="Phone number" className="w-full p-4 bg-black border border-white/20 rounded-lg" required />
+            <button className="w-full py-4 bg-white text-black font-bold uppercase tracking-widest rounded-lg">
+              Get Called Now
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-20 text-center text-sm text-white/40">
+        © {new Date().getFullYear()} Vynora Voice. All rights reserved.
+      </footer>
+    </div>
+  );
+}
